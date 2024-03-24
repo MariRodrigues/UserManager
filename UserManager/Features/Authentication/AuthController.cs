@@ -16,7 +16,7 @@ namespace UserManager.Features.Authentication
             _loginService = loginService;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         [SwaggerOperation(Summary = "Fazer login do usuário",
                           OperationId = "Post")]
         [ProducesResponseType(200)]

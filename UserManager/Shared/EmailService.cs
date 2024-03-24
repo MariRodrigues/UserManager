@@ -21,6 +21,7 @@ namespace UserManager.Shared
         private readonly string smtpServer = "smtp.gmail.com";
         private readonly int smtpPort = 587;
 
+
         public async Task<ResponseApi> ConfirmEmail(int userid, string token)
         {
             var user = await _userManager.FindByIdAsync(userid.ToString());
@@ -38,39 +39,11 @@ namespace UserManager.Shared
             return new ResponseApi(false, "E-mail confirmado com sucesso.");
         }
 
-        public async Task<ResponseApi> EnviarEmail(string destinatario, string assunto, string corpo)
+        public async Task<ResponseApi> SendAccountConfirmationEmail(int userid, string nome, string token, string email)
         {
             var smtpUsername = _configuration["SmtpSettings:Username"];
             var smtpPassword = _configuration["SmtpSettings:Password"];
 
-            try
-            {
-                using (SmtpClient client = new SmtpClient(smtpServer, smtpPort))
-                {
-                    client.UseDefaultCredentials = false;
-                    client.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
-                    client.EnableSsl = true;
-
-                    MailMessage mensagem = new MailMessage();
-                    mensagem.From = new MailAddress(smtpUsername);
-                    mensagem.To.Add(destinatario);
-                    mensagem.Subject = assunto;
-                    mensagem.Body = corpo;
-                    mensagem.IsBodyHtml = true; // Para suportar HTML no corpo do e-mail
-
-                    await client.SendMailAsync(mensagem);
-                }
-            }
-            catch (Exception ex)
-            {
-                return new ResponseApi(false, "Erro ao enviar email: " + ex.Message + ex.StackTrace);
-            }
-
-            return new ResponseApi(true, "Email enviado com sucesso");
-        }
-
-        public async Task<ResponseApi> SendAccountConfirmationEmail(int userid, string nome, string token, string email)
-        {
             var host = _configuration["EmailSettings:BaseUrl"];
 
             var uri = $"{host}/account/confirmacao?userid={userid}&token={token}";
