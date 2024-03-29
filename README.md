@@ -28,7 +28,7 @@ A aplicação usa o SQL Server. Para alterar a conexão, modifique a string de c
 
 ### Configurações de E-mail
 
-Para o envio de e-mails de confirmação, configure as seguintes propriedades no arquivo `appsettings.json`:
+Para o envio de e-mails de confirmação, configure as seguintes propriedades:
 
 ```json
 "EmailSettings": {
@@ -42,7 +42,7 @@ Para o envio de e-mails de confirmação, configure as seguintes propriedades no
 **Nota:** Para o campo Password em SmtpSettings, utilize a "senha de aplicativo" gerada nas configurações de sua conta do Gmail. As "senhas de aplicativo" oferecem um nível mais seguro de acesso ao seu e-mail quando utilizado por aplicações terceiras.
 
 ### Configurações JWT
-Para a geração e validação de tokens JWT, configure a SecretKey no arquivo appsettings.json:
+Para a geração e validação de tokens JWT, configure a SecretKey:
 ```json
 "JwtSettings": {
   "SecretKey": "<sua-chave-secreta>"
