@@ -13,7 +13,7 @@ builder.Services.ConfigureDatabase(builder.Environment, builder.Configuration);
 
 builder.Services
     .AddService(builder)
-    .AddAuthenticationConfiguration();
+    .AddAuthenticationConfiguration(builder.Configuration);
 
 var app = builder.Build();
 
