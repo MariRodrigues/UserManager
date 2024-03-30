@@ -61,7 +61,7 @@ namespace UserManager.Shared
                     MailMessage mensagem = new MailMessage();
                     mensagem.From = new MailAddress(smtpUsername);
                     mensagem.To.Add(email);
-                    mensagem.Subject = "Madenn - Confirmação de criação de conta";
+                    mensagem.Subject = "Confirmação de criação de conta";
                     mensagem.Body = body;
                     mensagem.IsBodyHtml = false;
 

@@ -8,10 +8,8 @@ namespace UserManager.Extensions
 {
     public static class DatabaseConfiguration
     {
-        public readonly static bool IsDocker = Environment.GetEnvironmentVariable("ASPNETCORE_DOCKER") == "1";
-        public static void ConfigureDatabase(this IServiceCollection services, IWebHostEnvironment env, ConfigurationManager configuration)
+        public static void ConfigureDatabase(this IServiceCollection services, ConfigurationManager configuration)
         {
-            
                 services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
         }
@@ -24,7 +22,7 @@ namespace UserManager.Extensions
             using var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
 
             // Verifica se o banco de dados existe
-            if (IsDocker && context.Database.GetPendingMigrations().Any())
+            if (context.Database.GetPendingMigrations().Any())
             {
                 try
                 {

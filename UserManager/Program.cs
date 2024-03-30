@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.ConfigureDatabase(builder.Environment, builder.Configuration);
+builder.Services.ConfigureDatabase(builder.Configuration);
 
 builder.Services
     .AddService(builder)

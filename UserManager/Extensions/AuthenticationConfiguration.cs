@@ -12,7 +12,10 @@ namespace UserManager.Extensions
     {
         public static IServiceCollection AddAuthenticationConfiguration(this IServiceCollection service, IConfiguration configuration)
         {
-            service.AddIdentity<CustomUser, IdentityRole<int>>()
+            service.AddIdentity<CustomUser, IdentityRole<int>>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = true;
+            })
                 .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
 
